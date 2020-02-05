@@ -15,11 +15,11 @@ source:
 build:
   number: 2
   skip: true  # [win or py<35]
-  script: "{{ PYTHON }} setup.py install --offline --single-version-externally-managed --record=record.txt"
+  script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
   build:
-    {{ compiler('c') }}
+    - {{ compiler('c') }}
   host:
     - python
     - setuptools
@@ -27,6 +27,7 @@ requirements:
     - gsl
   run:
     - python
+    - pytest
     - astropy
     - gsl
     - pyyaml
@@ -52,6 +53,10 @@ test:
     - gala.potential.potential
     - gala.potential.potential.builtin
     - gala.potential.scf
+  requires:
+    - pip
+  commands:
+    - pip check
 
 about:
   home: http://gala.adrian.pw/
