@@ -12,13 +12,13 @@ source:
 
 build:
   number: 0
-  skip: true  # [py<36]
-  script: {{ PYTHON }} -m pip install --no-deps --ignore-installed .
+  noarch: python
+  script: {{ PYTHON }} -m pip install .  --no-deps -vv
 
 requirements:
   build: {{ compiler('c') }}
   host:
-    - python
+    - python >=3.6
     - pip
     - setuptools
     - setuptools_scm
